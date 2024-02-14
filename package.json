@@ -1,0 +1,30 @@
+{
+  "name": "plan-editor",
+  "private": true,
+  "version": "0.0.1",
+  "author": {
+    "name": "Mehdi jai",
+    "email": "contact@mehdijai.com",
+    "url": "https://mehdijai.com"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.2",
+    "paper": "^0.12.17",
+    "pinia": "^2.1.7",
+    "vue": "^3.4.15",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "@vitejs/plugin-vue": "^5.0.3",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.0",
+    "vue-tsc": "^1.8.27"
+  }
+}
