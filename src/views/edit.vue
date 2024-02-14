@@ -7,6 +7,7 @@
   import type { IFloor, ITable } from "@/types/tables.type";
   import TableForm from "@/components/TableForm.vue";
   import { useFloorsStore } from "@/store/floor.store";
+  import Snack from "@/components/Snack.vue";
 
   const floorsStore = useFloorsStore();
   const { getFloor, updateFloor } = floorsStore;
@@ -148,9 +149,17 @@
   function quit() {
     router.push("/");
   }
+
+  const helped = ref(localStorage.getItem("rotation-help") !== null);
+
+  function closeHelpSnack() {
+    helped.value = true;
+    localStorage.setItem("rotation-help", "1");
+  }
 </script>
 <template>
   <section class="plan-editor">
+    <Snack v-if="!helped" @close="closeHelpSnack" />
     <TableForm
       @close="closeTableForm"
       @save="saveTableForm"
@@ -161,56 +170,38 @@
       <ul>
         <li class="controllers-wrapper">
           <div class="controllers">
-            <button
-              @click="quit"
-              :disabled="submitting"
-              class="btn btn-light-danger btn-icon-danger btn-text-danger"
-            >
-              <i class="ki-duotone ki-double-check fs-1">
-                <span class="path1"></span>
-                <span class="path2"></span>
-              </i>
+            <button @click="quit" class="btn btn-danger d-flex" style="color: red">
+              <span class="material-symbols-outlined" style="color: red"> logout </span>
               Quitter
             </button>
             <button
-              :disabled="!isDirty || submitting"
+              :disabled="!isDirty"
               @click="savePlan"
-              class="btn"
-              :class="
-                isDirty
-                  ? 'btn-light-success btn-icon-success btn-text-success'
-                  : 'btn-light-dark btn-icon-dark btn-text-dark'
-              "
+              class="btn d-flex"
+              :style="isDirty ? 'color: green;' : ''"
+              :class="isDirty ? 'btn-success' : 'btn-dark'"
             >
-              <i class="ki-duotone ki-double-check fs-1">
-                <span class="path1"></span>
-                <span class="path2"></span>
-              </i>
+              <span class="material-symbols-outlined" :style="isDirty ? 'color: green;' : ''">
+                done_all
+              </span>
               Enregistrer
             </button>
             <button
               v-if="selectedTable"
               @click="openTableForm"
-              class="btn btn-light-primary btn-icon-primary btn-text-primary"
+              class="btn btn-primary d-flex"
+              style="color: #646cff"
             >
-              <i class="ki-duotone ki-pencil fs-5">
-                <span class="path1"></span>
-                <span class="path2"></span>
-              </i>
+              <span class="material-symbols-outlined" style="color: #646cff"> edit </span>
               Modifier les info
             </button>
             <button
               v-if="selectedTable"
               @click="deleteTable"
-              class="btn btn-light-danger btn-icon-danger btn-text-danger"
+              class="btn btn-danger d-flex"
+              style="color: red"
             >
-              <i class="ki-duotone ki-trash fs-5">
-                <span class="path1"></span>
-                <span class="path2"></span>
-                <span class="path3"></span>
-                <span class="path4"></span>
-                <span class="path5"></span>
-              </i>
+              <span class="material-symbols-outlined" style="color: red"> delete </span>
               Supprimer
             </button>
           </div>
