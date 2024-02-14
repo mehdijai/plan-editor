@@ -47,6 +47,8 @@
       };
     });
 
+    console.log(tables.value);
+
     _floorEditor.value?.onIsClicked((ref: string | null) => {
       if (ref) {
         selectedTable.value = tables.value.find((table) => table.ref === ref);

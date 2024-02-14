@@ -70,7 +70,7 @@
           ref: el.ref,
           floor_id: floorId.value,
           max_count: el.chairs,
-          id: "",
+          id: el.id,
         };
       });
     });

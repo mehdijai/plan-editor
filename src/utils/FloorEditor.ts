@@ -1,6 +1,7 @@
 import { PaperScope, Path, Point, Tool, Size, Color, PointText } from "paper";
 import { EventEmitter } from "./EventModule";
 import { getAssetPath } from "./assets";
+import { createId } from "@paralleldrive/cuid2";
 
 export interface TableSchema {
   ref: string;
@@ -266,7 +267,7 @@ export class FloorEditor {
         y: offsetY,
       },
       rotation: 0,
-      id: "",
+      id: createId(),
     });
 
     this.eventEmitter.emit("isDirty", this.isDirty());
